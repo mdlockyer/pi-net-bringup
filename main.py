@@ -15,7 +15,7 @@ def _do_bringup_countdown(num_seconds: int) -> None:
 
 def _send_packet(mac_address: str) -> None:
     send_magic_packet(mac_address)
-    pt.info(f'Packet sent to: {mac_address}')
+    pt.success(f'Packet sent to: {mac_address}')
 
 
 def _shutdown() -> None:
@@ -33,9 +33,9 @@ def main(mac_address: str, delay: int, shutdown: bool) -> None:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Sends a Wake-on-LAN packet to bring up the network.')
-    parser.add_argument('mac_address', nargs=1, type=str,
+    parser.add_argument('mac_address', type=str,
                         help='The MAC address the packet should be sent to.')
-    parser.add_argument('-d', '--delay', metavar='Delay', type=int,
+    parser.add_argument('-d', '--delay', metavar='Delay', type=int, default=300,
                         help='The time in seconds before the packet is sent.')
     parser.add_argument('-s', '--shutdown', action="store_true",
                         help='Shutdown the device after packet is sent.')
