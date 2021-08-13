@@ -8,8 +8,7 @@ from wakeonlan import send_magic_packet
 def _do_bringup_countdown(num_seconds: int) -> None:
     count: int = 0
     while count < num_seconds:
-        pt.info('Starting bring-up countdown in '
-                f'{num_seconds - count} seconds.', end='\r')
+        pt.info(f'Starting bring-up in {num_seconds - count} seconds.', end='\r')
         sleep(1.0)
         count += 1
 
