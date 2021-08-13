@@ -2,6 +2,7 @@ from time import sleep
 import PrintTags as pt
 import argparse
 from os import system
+import subprocess
 from wakeonlan import send_magic_packet
 
 
@@ -19,8 +20,12 @@ def _send_packet(mac_address: str) -> None:
 
 
 def _shutdown() -> None:
-    sleep(5.0)
-    system('systemctl poweroff')
+    count: int = 0
+    while count < 5:
+        pt.info(f'Powering off in {5 - count} seconds.', end='\r')
+        sleep(1.0)
+        count += 1
+    subprocess.Popen(['shutdown', '-h', 'now'])
     pt.warn('Shutdown started')
 
 
